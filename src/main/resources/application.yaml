@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: MovieBase
+  dataSource:
+    url: <url>
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        jdbc:
+          lob:
+            non_contextual_creation: true
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
