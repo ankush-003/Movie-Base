@@ -44,8 +44,8 @@ public class MovieBaseApplication {
 //			movies.forEach(System.out::println);
 //			movieRepository.saveAll(movies);
 
-			movieRepository.findAll().forEach(System.out::println);
-			userRepository.findAll().forEach(System.out::println);
+//			movieRepository.findAll().forEach(System.out::println);
+//			userRepository.findAll().forEach(System.out::println);
 		};
 	}
 

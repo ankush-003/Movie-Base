@@ -1,6 +1,7 @@
 package com.ankush003.MovieBase.model.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -40,5 +41,6 @@ public class MovieEntity {
 
     // relations
     @OneToMany(mappedBy = "movie", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JsonManagedReference(value = "movie-review")
     private List<ReviewEntity> reviews;
 }

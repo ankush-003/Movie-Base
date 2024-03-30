@@ -21,22 +21,20 @@ import java.util.Optional;
 @RequestMapping("/reviews")
 public class ReviewController {
     private ReviewService reviewService;
-    private ReviewRepository reviewRepository;
     private UserService userService;
     private MovieService movieService;
     private Mapper<ReviewEntity, ReviewDto> reviewMapper;
 
     @Autowired
-    public ReviewController(ReviewService reviewService, ReviewRepository reviewRepository, UserService userService, MovieService movieService, Mapper<ReviewEntity, ReviewDto> reviewMapper) {
+    public ReviewController(ReviewService reviewService, UserService userService, MovieService movieService, Mapper<ReviewEntity, ReviewDto> reviewMapper) {
         this.reviewService = reviewService;
-        this.reviewRepository = reviewRepository;
         this.userService = userService;
         this.movieService = movieService;
         this.reviewMapper = reviewMapper;
     }
 
-    @PostMapping("/{userId}/{movieId}")
-    public ResponseEntity<ReviewDto> addReview(@RequestBody ReviewDto review, @PathVariable Long userId, @PathVariable Long movieId) {
+    @PostMapping("/new")
+    public ResponseEntity<ReviewDto> addReview(@RequestBody ReviewDto review, @RequestParam("userId") Long userId, @RequestParam("movieId") Long movieId) {
         ReviewEntity reviewEntity = reviewMapper.mapFrom(review);
         Optional<UserEntity> user = userService.getUserById(userId);
         Optional<MovieEntity> movie = movieService.getMovieById(movieId);
@@ -44,9 +42,9 @@ public class ReviewController {
         if (user.isEmpty() || movie.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
-        reviewEntity.setUser(user.get());
-        reviewEntity.setMovie(movie.get());
-        return ResponseEntity.ok(reviewMapper.mapTo(reviewService.addReview(reviewEntity)));
+
+        MovieEntity updatedMovie = movieService.updateMovieRating(movie.get(), reviewEntity.getRating());
+        return ResponseEntity.ok(reviewMapper.mapTo(reviewService.addReview(reviewEntity, user.get(), updatedMovie)));
 
         // sample json
         // {

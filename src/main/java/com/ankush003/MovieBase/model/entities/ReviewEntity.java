@@ -1,5 +1,6 @@
 package com.ankush003.MovieBase.model.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -33,9 +34,11 @@ public class ReviewEntity {
     // relations
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "movie_id", nullable = false)
+    @JsonBackReference(value = "movie-review")
     private MovieEntity movie;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id", nullable = false)
+    @JsonBackReference(value = "user-review")
     private UserEntity user;
 }

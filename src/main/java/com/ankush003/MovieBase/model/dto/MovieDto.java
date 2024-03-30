@@ -20,6 +20,6 @@ public class MovieDto {
     private String genre;
     private String director;
     private Double averageRating;
-    @JsonManagedReference(value = "movie-review")
+    @JsonManagedReference(value = "movie-review-dto")
     private List<ReviewDto> reviews;
 }

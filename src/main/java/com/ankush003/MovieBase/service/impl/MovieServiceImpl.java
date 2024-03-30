@@ -32,4 +32,46 @@ public class MovieServiceImpl implements MovieService {
     public Optional<MovieEntity> getMovieById(Long id) {
         return movieRepository.findById(id);
     }
+
+    @Override
+    public void deleteMovie(Long id) {
+        movieRepository.deleteById(id);
+    }
+
+    @Override
+    public MovieEntity updateMovie(MovieEntity movieEntity) {
+        return movieRepository.save(movieEntity);
+    }
+
+    @Override
+    public List<MovieEntity> findMoviesByGenre(String genre) {
+        return movieRepository.findMoviesByGenre(genre);
+    }
+
+    @Override
+    public List<MovieEntity> findMoviesByTitle(String title) {
+        return movieRepository.findMoviesByTitle(title);
+    }
+
+    @Override
+    public List<MovieEntity> findMoviesByYear(int year) {
+        return movieRepository.findMoviesByYear(year);
+    }
+
+    @Override
+    public List<MovieEntity> findMoviesByRating(double rating) {
+        return movieRepository.findMoviesByRating(rating);
+    }
+
+    @Override
+    public List<MovieEntity> findMoviesByRatingRange(double minRating, double maxRating) {
+        return movieRepository.findMoviesByRatingRange(minRating, maxRating);
+    }
+
+    @Override
+    public MovieEntity updateMovieRating(MovieEntity movieEntity, double rating) {
+        double newRating = (movieEntity.getAverageRating() + rating) / 2;
+        movieEntity.setAverageRating(newRating);
+        return movieRepository.save(movieEntity);
+    }
 }

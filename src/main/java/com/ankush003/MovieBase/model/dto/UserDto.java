@@ -21,6 +21,6 @@ public class UserDto {
     private String password;
     private Instant registeredAt;
 
-    @JsonManagedReference(value = "user-review")
+    @JsonManagedReference(value = "user-review-dto")
     private List<ReviewDto> reviews;
 }

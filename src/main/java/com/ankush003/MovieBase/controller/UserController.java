@@ -7,10 +7,9 @@ import com.ankush003.MovieBase.service.UserService;
 import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/users")
@@ -39,5 +38,12 @@ public class UserController {
         //     "password": "password",
         //     "email": "
         // }
+    }
+
+    @GetMapping("/login")
+    public ResponseEntity<UserDto> loginUser(@RequestParam("email") String email, @RequestParam("password") String password) {
+        log.info("Logging in user");
+        Optional<UserEntity> user = userService.loginUser(email, password);
+        return user.map(userEntity -> ResponseEntity.ok(userMapper.mapTo(userEntity))).orElseGet(() -> ResponseEntity.notFound().build());
     }
 }
