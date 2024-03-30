@@ -6,6 +6,8 @@ import com.ankush003.MovieBase.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
@@ -18,5 +20,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserEntity registerUser(UserEntity userEntity) {
         return userRepository.save(userEntity);
+    }
+
+    @Override
+    public Optional<UserEntity> getUserById(Long id) {
+        return userRepository.findById(id);
     }
 }

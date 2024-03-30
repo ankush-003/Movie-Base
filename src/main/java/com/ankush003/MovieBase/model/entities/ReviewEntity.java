@@ -20,7 +20,6 @@ public class ReviewEntity {
     @GeneratedValue
     private Long id;
 
-    @Lob
     @Column(name = "review")
     private String review;
 

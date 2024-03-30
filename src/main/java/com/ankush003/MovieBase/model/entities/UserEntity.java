@@ -6,7 +6,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 
+import java.time.Instant;
 import java.util.List;
 
 @Data
@@ -28,6 +30,10 @@ public class UserEntity {
 
     @Column(name = "password")
     private String password;
+
+    @CreationTimestamp
+    @Column(name = "registered_at")
+    private Instant registeredAt;
 
     // relations
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)

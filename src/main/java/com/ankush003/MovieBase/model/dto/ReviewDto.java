@@ -1,5 +1,6 @@
 package com.ankush003.MovieBase.model.dto;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,6 +17,8 @@ public class ReviewDto {
     private String review;
     private Double rating;
     private Instant createdAt;
+    @JsonBackReference(value = "movie-review")
     private MovieDto movie;
+    @JsonBackReference(value = "user-review")
     private UserDto user;
 }

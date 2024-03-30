@@ -1,5 +1,6 @@
 package com.ankush003.MovieBase.model.dto;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,5 +20,6 @@ public class MovieDto {
     private String genre;
     private String director;
     private Double averageRating;
+    @JsonManagedReference(value = "movie-review")
     private List<ReviewDto> reviews;
 }
