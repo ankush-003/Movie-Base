@@ -1,5 +1,6 @@
-package com.ankush003.MovieBase.model;
+package com.ankush003.MovieBase.model.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -15,7 +16,8 @@ import java.util.List;
 @Builder
 @Entity
 @Table(name = "movies")
-public class Movie {
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class MovieEntity {
     @Id
     @GeneratedValue
     private Long id;
@@ -24,6 +26,7 @@ public class Movie {
     private String title;
 
     @Column(name = "release_date")
+//    @JsonProperty("release_date")
     private LocalDate releaseDate;
 
     @Column(name = "genre")
@@ -36,6 +39,6 @@ public class Movie {
     private Double averageRating;
 
     // relations
-    @OneToMany(mappedBy = "movie")
-    private List<Review> reviews;
+    @OneToMany(mappedBy = "movie", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<ReviewEntity> reviews;
 }

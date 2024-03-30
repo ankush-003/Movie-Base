@@ -1,9 +1,9 @@
 package com.ankush003.MovieBase.repository;
 
-import com.ankush003.MovieBase.model.Movie;
+import com.ankush003.MovieBase.model.entities.MovieEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface MovieRepository extends JpaRepository<Movie, Long> {
+public interface MovieRepository extends JpaRepository<MovieEntity, Long> {
 }

@@ -1,5 +1,6 @@
-package com.ankush003.MovieBase.model;
+package com.ankush003.MovieBase.model.entities;
 
+import com.ankush003.MovieBase.model.entities.ReviewEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -14,7 +15,7 @@ import java.util.List;
 @Builder
 @Entity
 @Table(name = "users")
-public class User {
+public class UserEntity {
     @Id
     @GeneratedValue
     private Long id;
@@ -29,6 +30,6 @@ public class User {
     private String password;
 
     // relations
-    @OneToMany(mappedBy = "user")
-    private List<Review> reviews;
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<ReviewEntity> reviews;
 }

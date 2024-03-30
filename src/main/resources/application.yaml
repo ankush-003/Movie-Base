@@ -2,7 +2,7 @@ spring:
   application:
     name: MovieBase
   dataSource:
-    url: <url>
+    url: jdbc:postgresql://ankush-db-5136.8nk.gcp-asia-southeast1.cockroachlabs.cloud:26257/defaultdb?sslmode=require&password=gqntwyTxjq5OEOZlpPqv8g&user=ankush
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:

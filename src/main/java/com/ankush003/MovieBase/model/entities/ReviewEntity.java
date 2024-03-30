@@ -1,10 +1,13 @@
-package com.ankush003.MovieBase.model;
+package com.ankush003.MovieBase.model.entities;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
+
+import java.time.Instant;
 
 @Data
 @NoArgsConstructor
@@ -12,7 +15,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @Entity
 @Table(name = "reviews")
-public class Review {
+public class ReviewEntity {
     @Id
     @GeneratedValue
     private Long id;
@@ -24,12 +27,16 @@ public class Review {
     @Column(name = "rating")
     private Double rating;
 
-    // relations
-    @ManyToOne
-    @JoinColumn(name = "movie_id", nullable = false)
-    private Movie movie;
+    @CreationTimestamp
+    @Column(name = "created_at", updatable = false)
+    private Instant createdAt;
 
-    @ManyToOne
+    // relations
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "movie_id", nullable = false)
+    private MovieEntity movie;
+
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    private UserEntity user;
 }
