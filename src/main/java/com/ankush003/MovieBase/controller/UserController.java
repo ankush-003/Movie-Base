@@ -13,8 +13,9 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/api/users")
 @Log
+@CrossOrigin(origins = "http://localhost:3000")
 public class UserController {
     private UserService userService;
     private Mapper<UserEntity, UserDto> userMapper;

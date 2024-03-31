@@ -18,6 +18,7 @@ public class MovieDto {
     private String title;
     private LocalDate releaseDate;
     private String genre;
+    private String posterUrl;
     private String director;
     private Double averageRating;
     @JsonManagedReference(value = "movie-review-dto")

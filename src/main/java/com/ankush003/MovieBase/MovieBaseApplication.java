@@ -37,15 +37,15 @@ public class MovieBaseApplication {
 		return args -> {
 			System.out.println("Hello from MovieBaseApplication");
 
-			UserEntity newUser = UserEntity.builder()
-					.name("Ankush")
-					.email("anshhv2003@gmail.com")
-					.password("password")
-					.build();
-
-			userRepository.save(newUser);
-
-			movieRepository.saveAll(movies);
+//			UserEntity newUser = UserEntity.builder()
+//					.name("Ankush")
+//					.email("anshhv2003@gmail.com")
+//					.password("password")
+//					.build();
+//
+//			userRepository.save(newUser);
+//
+//			movieRepository.saveAll(movies);
 		};
 	}
 
@@ -54,6 +54,7 @@ public class MovieBaseApplication {
 					.title("The Dark Knight")
 					.releaseDate(LocalDate.of(2008, 7, 18))
 					.genre("Action, Crime, Drama")
+					.posterUrl("https://m.media-amazon.com/images/I/81CLFQwU-WL.jpg")
 					.director("Christopher Nolan")
 					.averageRating(9.0)
 					.build(),
@@ -62,11 +63,13 @@ public class MovieBaseApplication {
 					.releaseDate(LocalDate.of(2010, 7, 16))
 					.genre("Action, Adventure, Sci-Fi")
 					.director("Christopher Nolan")
+					.posterUrl("https://m.media-amazon.com/images/I/71DwIcSgFcS.jpg")
 					.averageRating(8.8)
 					.build(),
 			MovieEntity.builder()
 					.title("Interstellar")
 					.releaseDate(LocalDate.of(2014, 11, 7))
+					.posterUrl("https://rukminim2.flixcart.com/image/850/1000/jsxjekw0/poster/p/h/x/medium-interstellar-e-interstellar-movies-poster-for-room-office-original-imafed464espvnzr.jpeg")
 					.genre("Adventure, Drama, Sci-Fi")
 					.director("Christopher Nolan")
 					.averageRating(8.6)

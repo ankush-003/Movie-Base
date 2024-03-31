@@ -26,6 +26,9 @@ public class MovieEntity {
     @Column(name = "title")
     private String title;
 
+    @Column(name = "poster_url")
+    private String posterUrl;
+
     @Column(name = "release_date")
 //    @JsonProperty("release_date")
     private LocalDate releaseDate;

@@ -21,7 +21,8 @@ import java.util.Optional;
 
 @RestController
 @Log
-@RequestMapping("/movies")
+@RequestMapping("/api/movies")
+@CrossOrigin(origins = "http://localhost:3000")
 public class MovieController {
     private MovieService movieService;
     private ReviewService reviewService;
