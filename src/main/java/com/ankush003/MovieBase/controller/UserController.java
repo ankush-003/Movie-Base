@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -45,5 +46,23 @@ public class UserController {
         log.info("Logging in user");
         Optional<UserEntity> user = userService.loginUser(email, password);
         return user.map(userEntity -> ResponseEntity.ok(userMapper.mapTo(userEntity))).orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteUser(@PathVariable("id") Long id) {
+        log.info("Deleting user");
+        Optional<UserEntity> user = userService.getUserById(id);
+
+        if (user.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        userService.deleteUser(id);
+        return ResponseEntity.ok("User Id: " + id + " deleted");
+    }
+
+    @GetMapping("/admin/all")
+    public ResponseEntity<List<UserDto>> getAllUsers() {
+        log.info("Getting all users");
+        return ResponseEntity.ok(userMapper.mapTo(userService.getAllUsers()));
     }
 }

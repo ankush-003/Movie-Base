@@ -2,7 +2,9 @@ package com.ankush003.MovieBase.controller;
 
 import com.ankush003.MovieBase.mappers.Mapper;
 import com.ankush003.MovieBase.model.dto.MovieDto;
+import com.ankush003.MovieBase.model.dto.ReviewDto;
 import com.ankush003.MovieBase.model.entities.MovieEntity;
+import com.ankush003.MovieBase.model.entities.ReviewEntity;
 import com.ankush003.MovieBase.repository.MovieRepository;
 import com.ankush003.MovieBase.repository.ReviewRepository;
 import com.ankush003.MovieBase.repository.UserRepository;
@@ -15,26 +17,30 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @Log
-@RequestMapping("/movie")
+@RequestMapping("/movies")
 public class MovieController {
     private MovieService movieService;
     private ReviewService reviewService;
 
     private final Mapper<MovieEntity, MovieDto> movieMapper;
+    private final Mapper<ReviewEntity, ReviewDto> reviewMapper;
 
     @Autowired
     public MovieController(
             MovieService movieService,
             ReviewService reviewService,
-            Mapper<MovieEntity, MovieDto> movieMapper
+            Mapper<MovieEntity, MovieDto> movieMapper,
+            Mapper<ReviewEntity, ReviewDto> reviewMapper
     ) {
         log.info("MovieController created");
         this.movieService = movieService;
         this.reviewService = reviewService;
         this.movieMapper = movieMapper;
+        this.reviewMapper = reviewMapper;
     }
 
     @GetMapping("/all")
@@ -83,5 +89,27 @@ public class MovieController {
     public ResponseEntity<MovieDto> addMovie(@RequestBody MovieDto movie) {
         log.info("Adding new movie");
         return ResponseEntity.ok(movieMapper.mapTo(movieService.addMovie(movieMapper.mapFrom(movie))));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteMovie(@PathVariable Long id) {
+        log.info("Deleting movie");
+        Optional<MovieEntity> movie = movieService.getMovieById(id);
+        if (movie.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        movieService.deleteMovie(id);
+
+        return ResponseEntity.ok("Movie Id: " + id + " deleted");
+    }
+
+    @GetMapping("/reviews/{id}")
+    public ResponseEntity<List<ReviewDto>> getMovieReviews(@PathVariable Long id) {
+        log.info("Getting reviews for movie");
+        List<ReviewEntity> reviews = reviewService.findReviewsByMovieId(id);
+        if (reviews.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(reviewMapper.mapTo(reviews));
     }
 }

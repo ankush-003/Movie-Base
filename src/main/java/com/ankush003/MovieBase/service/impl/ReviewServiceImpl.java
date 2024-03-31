@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ReviewServiceImpl implements ReviewService {
@@ -24,6 +25,11 @@ public class ReviewServiceImpl implements ReviewService {
         reviewEntity.setUser(user);
         reviewEntity.setMovie(movie);
         return reviewRepository.save(reviewEntity);
+    }
+
+    @Override
+    public Optional<ReviewEntity> getReviewById(Long id) {
+        return reviewRepository.findById(id);
     }
 
     @Override

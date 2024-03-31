@@ -17,8 +17,12 @@ public class ReviewDto {
     private String review;
     private Double rating;
     private Instant createdAt;
+//    private Long MovieId;
+//    private Long UserId;
+
     @JsonBackReference(value = "movie-review-dto")
     private MovieDto movie;
+
     @JsonBackReference(value = "user-review-dto")
     private UserDto user;
 }

@@ -4,6 +4,7 @@ import com.ankush003.MovieBase.mappers.Mapper;
 import com.ankush003.MovieBase.model.dto.ReviewDto;
 import com.ankush003.MovieBase.model.entities.ReviewEntity;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.PropertyMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -17,6 +18,14 @@ public class ReviewMapperImpl implements Mapper<ReviewEntity, ReviewDto> {
     @Autowired
     public ReviewMapperImpl(ModelMapper modelMapper) {
         this.modelMapper = modelMapper;
+//        modelMapper.addMappings(new PropertyMap<ReviewEntity, ReviewDto>() {
+//            @Override
+//            protected void configure() {
+//                map().setMovieId(source.getMovie().getId());
+//                map().setUserId(source.getUser().getId());
+//            }
+//
+//        });
     }
 
     @Override

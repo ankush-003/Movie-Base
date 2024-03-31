@@ -32,12 +32,12 @@ public class ReviewEntity {
     private Instant createdAt;
 
     // relations
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "movie_id", nullable = false)
     @JsonBackReference(value = "movie-review")
     private MovieEntity movie;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     @JsonBackReference(value = "user-review")
     private UserEntity user;

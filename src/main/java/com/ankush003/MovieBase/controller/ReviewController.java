@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -51,5 +52,20 @@ public class ReviewController {
         //     "rating": 5,
         //     "review": "This is a great movie"
         // }
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteReview(@PathVariable("id") Long id) {
+        Optional<ReviewEntity> review = reviewService.getReviewById(id);
+        if (review.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        reviewService.deleteReview(id);
+        return ResponseEntity.ok("Review Id: " + id + " deleted");
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<List<ReviewDto>> getAllReviews() {
+        return ResponseEntity.ok(reviewMapper.mapTo(reviewService.getAllReviews()));
     }
 }
