@@ -20,6 +20,9 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public MovieEntity addMovie(MovieEntity movieEntity) {
+        movieEntity.setAverageRating(0.0);
+        movieEntity.setAccumulatedRating(0.0);
+        movieEntity.setTotalReviews(0);
         return movieRepository.save(movieEntity);
     }
 
@@ -70,8 +73,21 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public MovieEntity updateMovieRating(MovieEntity movieEntity, double rating) {
-        double newRating = (movieEntity.getAverageRating() + rating) / 2;
+        Double totalRating = movieEntity.getAccumulatedRating();
+        Integer totalReviews = movieEntity.getTotalReviews();
+        if (totalReviews == null || totalRating == null) {
+            totalRating = 0.0;
+            totalReviews = 1;
+        } else {
+            totalRating += rating;
+            totalReviews++;
+        }
+        Double newRating = totalRating / totalReviews;
+
+        movieEntity.setAccumulatedRating(totalRating);
+        movieEntity.setTotalReviews(totalReviews);
         movieEntity.setAverageRating(newRating);
+
         return movieRepository.save(movieEntity);
     }
 }
