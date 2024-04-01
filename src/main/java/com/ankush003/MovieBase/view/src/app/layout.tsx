@@ -11,6 +11,7 @@ import { useState, useEffect } from "react"
 import RegisterDialog from "@/components/RegisterDialog"
 import LoginDialog from "@/components/LoginDialog";
 import { Toaster } from "@/components/ui/sonner"
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
@@ -70,6 +71,7 @@ export default function RootLayout({
                 <RegisterDialog />
               )
             }
+            <ThemeToggle />
             </div>
             
           </div>
