@@ -50,6 +50,13 @@ public class MovieController {
         return ResponseEntity.ok(movieMapper.mapTo(movieService.getAllMovies()));
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<MovieDto> getMovieById(@PathVariable Long id) {
+        log.info("Getting movie by id");
+        Optional<MovieEntity> movie = movieService.getMovieById(id);
+        return movie.map(movieEntity -> ResponseEntity.ok(movieMapper.mapTo(movieEntity))).orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
     @GetMapping("/genre")
     public ResponseEntity<List<MovieDto>> getMoviesByGenre(@RequestParam("genre") String genre) {
         log.info("Getting movies by genre");

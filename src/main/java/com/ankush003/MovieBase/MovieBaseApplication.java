@@ -44,9 +44,9 @@ public class MovieBaseApplication {
 					.password("password")
 					.build();
 
-			userService.registerUser(newUser);
+//			userService.registerUser(newUser);
 //
-			movies.forEach(movieService::addMovie);
+//			movies.forEach(movieService::addMovie);
 		};
 	}
 
