@@ -92,7 +92,7 @@ const Movies = () => {
               <Card className="backdrop-blur-sm">
                 <CardHeader>
                   <CardTitle>
-                    <div className="text-pretty">{movie.title}</div>
+                    <div className="text-pretty overflow-hidden">{movie.title}</div>
                   </CardTitle>
                   <CardDescription>{movie.releaseDate}</CardDescription>
                 </CardHeader>

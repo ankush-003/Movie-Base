@@ -97,6 +97,14 @@ public class MovieController {
     public ResponseEntity<MovieDto> addMovie(@RequestBody MovieDto movie) {
         log.info("Adding new movie");
         return ResponseEntity.ok(movieMapper.mapTo(movieService.addMovie(movieMapper.mapFrom(movie))));
+        // sample json
+        // {
+        //     "title": "Animal",
+        //     "releaseDate": "2023-12-21",
+        //     "genre": "Crime, Action, Drama",
+        //     "posterUrl": "https://m.media-amazon.com/images/I/71e1JzgZGTL._AC_SY679_.jpg",
+        //     "director": "Roger Allers, Rob Minkoff"
+        // }
     }
 
     @DeleteMapping("/{id}")

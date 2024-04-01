@@ -47,6 +47,7 @@ const LoginDialog = () => {
       toast.success("User logged in successfully");
     } else {
       toast.error("Failed to login user");
+      sessionStorage.setItem("isLoggedIn", "false");
       console.log("Failed to login user");
     }
   };

@@ -15,6 +15,7 @@ import {
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
 import { useState, useEffect } from "react";
+import { Home, Pencil, Info } from 'lucide-react';
 
 export function Navbar() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -35,7 +36,7 @@ export function Navbar() {
     setIsLoggedIn(true);
   };
   return (
-    <NavigationMenu>
+    <NavigationMenu className="backdrop-blur-md">
       <div>
         <NavigationMenuList>
           <NavigationMenuItem>
@@ -48,7 +49,10 @@ export function Navbar() {
           <NavigationMenuItem>
             <Link href="/" legacyBehavior passHref>
               <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                Home
+                <div className="flex gap-2 items-center justify-center">
+                  <Home />
+                  home
+                </div>
               </NavigationMenuLink>
             </Link>
           </NavigationMenuItem>
@@ -56,7 +60,10 @@ export function Navbar() {
             <NavigationMenuItem>
               <Link href="/review" legacyBehavior passHref>
                 <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                  Reviews
+                <div className="flex gap-2 items-center justify-center">
+                  <Pencil />
+                  reviews
+                </div>
                 </NavigationMenuLink>
               </Link>
             </NavigationMenuItem>
@@ -64,7 +71,10 @@ export function Navbar() {
           <NavigationMenuItem>
             <Link href="https://github.com/ankush-003" legacyBehavior passHref>
               <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                About
+              <div className="flex gap-2 items-center justify-center">
+                  <Info />
+                  about
+                </div>
               </NavigationMenuLink>
             </Link>
           </NavigationMenuItem>

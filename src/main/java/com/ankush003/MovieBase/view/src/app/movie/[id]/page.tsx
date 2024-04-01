@@ -2,6 +2,7 @@
 import { type Movie } from "@/components/Movies";
 import { useState, useEffect } from "react";
 import Image from "next/image";
+import MovieReviews from "@/components/MovieReviews";
 
 export default function MoviePage({
   params,
@@ -32,14 +33,14 @@ export default function MoviePage({
               className="rounded-lg justify-self-start"
             />
           )}
-          <div className="flex flex-col justify-center w-full items-center">
-            <h1 className="text-2xl font-semibold leading-none tracking-tight mx-auto my-2 text-center p-2">
+          <div className="flex flex-col justify-center w-full items-center text-lg">
+            <h1 className="text-4xl font-semibold leading-none tracking-tight mx-auto my-2 text-center p-2">
               {movie?.title}
             </h1>
-            <p className="text-sm text-muted-foreground text-center">
+            <p className="text-muted-foreground text-center">
               {movie?.releaseDate}
             </p>
-            <div className="text-sm text-gray-500 text-center">
+            <div className="text-center">
               <p>
                 <strong>Director</strong>: {movie?.director}
               </p>
@@ -53,6 +54,13 @@ export default function MoviePage({
                 <strong>Total Reviews</strong>: {movie?.totalReviews}
               </p>
             </div>
+            {
+              movie?.reviews && (
+                <div className="mt-8 pt-4">
+                  <MovieReviews reviews={movie?.reviews} />
+                </div>
+              )
+            }
           </div>
         </div>
       </div>
