@@ -4,11 +4,15 @@ import com.ankush003.MovieBase.mappers.Mapper;
 import com.ankush003.MovieBase.model.dto.UserDto;
 import com.ankush003.MovieBase.model.entities.UserEntity;
 import com.ankush003.MovieBase.service.UserService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
+import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,14 +20,17 @@ import java.util.Optional;
 @RequestMapping("/api/users")
 @Log
 @CrossOrigin(origins = "http://localhost:3000")
+@RequiredArgsConstructor
 public class UserController {
     private UserService userService;
     private Mapper<UserEntity, UserDto> userMapper;
 
-    @Autowired
-    public UserController(UserService userService, Mapper<UserEntity, UserDto> userMapper) {
-        this.userService = userService;
-        this.userMapper = userMapper;
+    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
+    @GetMapping("/welcome")
+    // authentication object is injected by spring security when the user is authenticated
+    // Principal object is injected by spring security when the user is authenticated
+    public ResponseEntity<String> welcomeUser(Principal authentication) {
+        return ResponseEntity.ok("Welcome " + authentication.toString());
     }
 
     @PostMapping("/register")
@@ -41,6 +48,7 @@ public class UserController {
         //     "email": "
         // }
     }
+
 
     @GetMapping("/login")
     public ResponseEntity<UserDto> loginUser(@RequestParam("email") String email, @RequestParam("password") String password) {

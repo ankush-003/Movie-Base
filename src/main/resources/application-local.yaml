@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: MovieBase
+  dataSource:
+    url: jdbc:postgresql://localhost:5432/movieBase
+    username: postgres
+    password: ankush
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        jdbc:
+          lob:
+            non_contextual_creation: true
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+
+logging:
+  level:
+    org.springframework.security: trace

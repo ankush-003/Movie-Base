@@ -39,12 +39,13 @@ public class MovieBaseApplication {
 			System.out.println("Hello from MovieBaseApplication");
 
 			UserEntity newUser = UserEntity.builder()
-					.name("Ankush")
-					.email("anshhv2003@gmail.com")
+					.username("ankush003")
 					.password("password")
+					.email("anshhv2003@gmail.com")
+					.roles("ROLE_USER")
 					.build();
 
-//			userService.registerUser(newUser);
+			userService.registerUser(newUser);
 //
 //			movies.forEach(movieService::addMovie);
 		};

@@ -23,8 +23,8 @@ public class UserEntity {
     @GeneratedValue
     private Long id;
 
-    @Column(name = "name", nullable = false)
-    private String name;
+    @Column(name = "username", nullable = false)
+    private String username;
 
     @Column(name = "email", unique = true, nullable = false)
     private String email;
@@ -40,4 +40,9 @@ public class UserEntity {
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JsonManagedReference(value = "user-review")
     private List<ReviewEntity> reviews;
+
+    @Column(name = "roles", nullable = false)
+    private String roles;
+
+
 }
