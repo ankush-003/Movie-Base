@@ -6,10 +6,11 @@ import com.ankush003.MovieBase.model.entities.UserEntity;
 import com.ankush003.MovieBase.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
-import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
@@ -25,12 +26,11 @@ public class UserController {
     private UserService userService;
     private Mapper<UserEntity, UserDto> userMapper;
 
-    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
+//    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
     @GetMapping("/welcome")
-    // authentication object is injected by spring security when the user is authenticated
-    // Principal object is injected by spring security when the user is authenticated
-    public ResponseEntity<String> welcomeUser(Principal authentication) {
-        return ResponseEntity.ok("Welcome " + authentication.toString());
+    @PreAuthorize("hasAuthority('SCOPE_READ')")
+    public ResponseEntity<String> welcomeUser(Authentication authentication) {
+        return ResponseEntity.ok("Welcome " + authentication.getName() + " with authorities: " + authentication.getAuthorities());
     }
 
     @PostMapping("/register")

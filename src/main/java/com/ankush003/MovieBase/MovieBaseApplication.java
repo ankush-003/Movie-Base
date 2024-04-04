@@ -1,5 +1,6 @@
 package com.ankush003.MovieBase;
 
+import com.ankush003.MovieBase.config.RSAKeyRecord;
 import com.ankush003.MovieBase.model.entities.MovieEntity;
 import com.ankush003.MovieBase.model.entities.UserEntity;
 import com.ankush003.MovieBase.repository.MovieRepository;
@@ -10,12 +11,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 
 import java.time.LocalDate;
 import java.util.List;
 
 @SpringBootApplication
+@EnableConfigurationProperties(RSAKeyRecord.class)
 public class MovieBaseApplication {
 	private final UserService userService;
 	private final MovieService movieService;
